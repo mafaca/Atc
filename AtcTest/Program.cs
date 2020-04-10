@@ -27,7 +27,6 @@ namespace AtcTest
 			{
 				ConsoleKeyInfo key;
 				byte[] data = File.ReadAllBytes(path);
-				AtcDecoder decoder = new AtcDecoder();
 				Stopwatch stopwatch = new Stopwatch();
 				do
 				{
@@ -35,10 +34,10 @@ namespace AtcTest
 					switch (mode)
 					{
 						case 0:
-							decoder.DecompressAtcRgb4(data, width, height, bitmap.Bits);
+							AtcDecoder.DecompressAtcRgb4(data, width, height, bitmap.Bits);
 							break;
 						case 1:
-							decoder.DecompressAtcRgba8(data, width, height, bitmap.Bits);
+							AtcDecoder.DecompressAtcRgba8(data, width, height, bitmap.Bits);
 							break;
 
 						default:
@@ -55,6 +54,7 @@ namespace AtcTest
 				string dirPath = Path.GetDirectoryName(path);
 				string fileName = Path.GetFileNameWithoutExtension(path);
 				string outPath = Path.Combine(dirPath, fileName + ".png");
+				bitmap.Bitmap.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipY);
 				bitmap.Bitmap.Save(outPath, ImageFormat.Png);
 			}
 
