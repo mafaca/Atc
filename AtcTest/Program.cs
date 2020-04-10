@@ -25,31 +25,32 @@ namespace AtcTest
 
 			using (DirectBitmap bitmap = new DirectBitmap(width, height))
 			{
-				ConsoleKeyInfo key;
 				byte[] data = File.ReadAllBytes(path);
 				Stopwatch stopwatch = new Stopwatch();
-				do
+
+				for (int j = 0; j < 5; j++)
 				{
 					stopwatch.Start();
-					switch (mode)
+					for (int i = 0; i < 10; i++)
 					{
-						case 0:
-							AtcDecoder.DecompressAtcRgb4(data, width, height, bitmap.Bits);
-							break;
-						case 1:
-							AtcDecoder.DecompressAtcRgba8(data, width, height, bitmap.Bits);
-							break;
+						switch (mode)
+						{
+							case 0:
+								AtcDecoder.DecompressAtcRgb4(data, width, height, bitmap.Bits);
+								break;
+							case 1:
+								AtcDecoder.DecompressAtcRgba8(data, width, height, bitmap.Bits);
+								break;
 
-						default:
-							throw new Exception(mode.ToString());
+							default:
+								throw new Exception(mode.ToString());
+						}
 					}
 					stopwatch.Stop();
 
 					Console.WriteLine("Processed " + stopwatch.ElapsedMilliseconds);
 					stopwatch.Reset();
-					key = Console.ReadKey();
 				}
-				while (key.Key == ConsoleKey.Spacebar);
 
 				string dirPath = Path.GetDirectoryName(path);
 				string fileName = Path.GetFileNameWithoutExtension(path);

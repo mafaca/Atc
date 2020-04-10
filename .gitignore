@@ -1,5 +1,6 @@
 **/.vs/
 **/*.*.user
+!AtcNative/AtcNative.vcxproj.user
 !AtcTest/AtcTest.csproj.user
 packages/
 **/packages.config
