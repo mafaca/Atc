@@ -110,13 +110,13 @@ namespace Atc
 				m_colors[13] = Extend((c1 >> 5) & 0x3f, 6, 8);
 				m_colors[14] = Extend((c1 >> 11) & 0x1F, 5, 8);
 
-				m_colors[4] = (2 * m_colors[0] + m_colors[12]) / 3;
-				m_colors[5] = (2 * m_colors[1] + m_colors[13]) / 3;
-				m_colors[6] = (2 * m_colors[2] + m_colors[14]) / 3;
+				m_colors[4] = (5 * m_colors[0] + 3 * m_colors[12]) / 8;
+				m_colors[5] = (5 * m_colors[1] + 3 * m_colors[13]) / 8;
+				m_colors[6] = (5 * m_colors[2] + 3 * m_colors[14]) / 8;
 
-				m_colors[8] = (m_colors[0] + 2 * m_colors[12]) / 3;
-				m_colors[9] = (m_colors[1] + 2 * m_colors[13]) / 3;
-				m_colors[10] = (m_colors[2] + 2 * m_colors[14]) / 3;
+				m_colors[8] = (3 * m_colors[0] + 5 * m_colors[12]) / 8;
+				m_colors[9] = (3 * m_colors[1] + 5 * m_colors[13]) / 8;
+				m_colors[10] = (3 * m_colors[2] + 5 * m_colors[14]) / 8;
 			}
 			else
 			{
@@ -132,9 +132,9 @@ namespace Atc
 				m_colors[13] = Extend((c1 >> 5) & 0x3F, 6, 8);
 				m_colors[14] = Extend((c1 >> 11) & 0x1F, 5, 8);
 
-				m_colors[4] = m_colors[8] - m_colors[12] / 4;
-				m_colors[5] = m_colors[9] - m_colors[13] / 4;
-				m_colors[6] = m_colors[10] - m_colors[14] / 4;
+				m_colors[4] = Math.Max(0, m_colors[8] - m_colors[12] / 4);
+				m_colors[5] = Math.Max(0, m_colors[9] - m_colors[13] / 4);
+				m_colors[6] = Math.Max(0, m_colors[10] - m_colors[14] / 4);
 			}
 		}
 
