@@ -1,4 +1,5 @@
 #include "atc.h"
+#include <algorithm>
 #include <cstring>
 
 static inline uint16_t uload16(const void* p)
@@ -38,9 +39,9 @@ inline void DecodeColors(uint8_t* colors, uint32_t c0, uint32_t c1)
 		colors[13] = u32_extend((c1 >> 5) & 0x3f, 6, 8);
 		colors[14] = u32_extend((c1 >> 11) & 0x1f, 5, 8);
 
-		colors[4] = colors[8] - colors[12] / 4;
-		colors[5] = colors[9] - colors[13] / 4;
-		colors[6] = colors[10] - colors[14] / 4;
+		colors[4] = std::max(0, colors[8] - colors[12] / 4);
+		colors[5] = std::max(0, colors[9] - colors[13] / 4);
+		colors[6] = std::max(0, colors[10] - colors[14] / 4);
 	}
 	else
 	{
@@ -52,13 +53,13 @@ inline void DecodeColors(uint8_t* colors, uint32_t c0, uint32_t c1)
 		colors[13] = u32_extend((c1 >> 5) & 0x3f, 6, 8);
 		colors[14] = u32_extend((c1 >> 11) & 0x1f, 5, 8);
 
-		colors[4] = (2 * colors[0] + colors[12]) / 3;
-		colors[5] = (2 * colors[1] + colors[13]) / 3;
-		colors[6] = (2 * colors[2] + colors[14]) / 3;
+		colors[4] = (5 * colors[0] + 3 * colors[12]) / 8;
+		colors[5] = (5 * colors[1] + 3 * colors[13]) / 8;
+		colors[6] = (5 * colors[2] + 3 * colors[14]) / 8;
 
-		colors[8] = (colors[0] + 2 * colors[12]) / 3;
-		colors[9] = (colors[1] + 2 * colors[13]) / 3;
-		colors[10] = (colors[2] + 2 * colors[14]) / 3;
+		colors[8] = (3 * colors[0] + 5 * colors[12]) / 8;
+		colors[9] = (3 * colors[1] + 5 * colors[13]) / 8;
+		colors[10] = (3 * colors[2] + 5 * colors[14]) / 8;
 	}
 }
 
