@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.CompilerServices;
 
 namespace Atc
@@ -151,13 +152,13 @@ namespace Atc
 				colors[13] = Extend((c1 >> 5) & 0x3f, 6, 8);
 				colors[14] = Extend((c1 >> 11) & 0x1F, 5, 8);
 
-				colors[4] = (2 * colors[0] + colors[12]) / 3;
-				colors[5] = (2 * colors[1] + colors[13]) / 3;
-				colors[6] = (2 * colors[2] + colors[14]) / 3;
+				colors[4] = (5 * colors[0] + 3 * colors[12]) / 8;
+				colors[5] = (5 * colors[1] + 3 * colors[13]) / 8;
+				colors[6] = (5 * colors[2] + 3 * colors[14]) / 8;
 
-				colors[8] = (colors[0] + 2 * colors[12]) / 3;
-				colors[9] = (colors[1] + 2 * colors[13]) / 3;
-				colors[10] = (colors[2] + 2 * colors[14]) / 3;
+				colors[8] = (3 * colors[0] + 5 * colors[12]) / 8;
+				colors[9] = (3 * colors[1] + 5 * colors[13]) / 8;
+				colors[10] = (3 * colors[2] + 5 * colors[14]) / 8;
 			}
 			else
 			{
@@ -173,9 +174,9 @@ namespace Atc
 				colors[13] = Extend((c1 >> 5) & 0x3F, 6, 8);
 				colors[14] = Extend((c1 >> 11) & 0x1F, 5, 8);
 
-				colors[4] = colors[8] - colors[12] / 4;
-				colors[5] = colors[9] - colors[13] / 4;
-				colors[6] = colors[10] - colors[14] / 4;
+				colors[4] = Math.Max(0, colors[8] - colors[12] / 4);
+				colors[5] = Math.Max(0, colors[9] - colors[13] / 4);
+				colors[6] = Math.Max(0, colors[10] - colors[14] / 4);
 			}
 		}
 
